@@ -27,7 +27,12 @@ Output<br>
 
     	// adjust
     	for(i=0;i<splitTab.length;i++){
-    		splitTab[i] = parseInt(splitTab[i])+5;
+    		var parsed = parseInt(splitTab[i])+5;
+    		if(!isNaN(parsed)) {
+    			splitTab[i] = parsed;
+    		} else {
+    			splitTab[i] = "";
+    		}
     	}
 
     	// reform
