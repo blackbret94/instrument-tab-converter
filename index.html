@@ -3,45 +3,89 @@
 </head>
 
 <form onsubmit="return genTab()">
-	Tab:<br>
-	<textarea rows="6" cols="70" name="in-tab" id="in-tab">Insert tab here!</textarea><br>
-	Instrument:<br>
-	<input type="radio" name="instrument" value="guitar">Guitar<br>
-	<input type="radio" name="instrument" value="mandolin">Mandolin<br>
-	<input type="submit" value="Submit">
+    Tab:<br>
+    <textarea rows="6" cols="70" name="in-tab" id="in-tab">Insert tab here!</textarea><br>
+    Instrument:<br>
+    <input type="radio" name="instrument" value="guitar">Guitar<br>
+    <input type="radio" name="instrument" value="mandolin">Mandolin<br>
+    <input type="submit" value="Submit">
 </form>
 Output<br>
 <textarea rows="6" cols="70" name="out-tab" id="out-tab"></textarea>
 <script>
-	
+    // guitar strings
+    var inStrings = [noteToNumber("E",4),noteToNumber("B",3),noteToNumber("G",3),noteToNumber("D",3),noteToNumber("A",2),noteToNumber("E",2)];
+
+    // mandolin strings
+    var outStrings = [noteToNumber("G",3),noteToNumber("D",4),noteToNumber("A",4),noteToNumber("E",5)]
+
+    
     function genTab() {
-    	converted = transpose( $('#in-tab').val());
-    	$('#out-tab').val(converted);
-       	return false;
+        converted = transpose( $('#in-tab').val());
+        $('#out-tab').val(converted);
+        return false;
     }
 
     // transpose
     function transpose(tab){
-    	// split
-    	var splitTab = tab.split("-");
+        
 
-    	// adjust
-    	for(i=0;i<splitTab.length;i++){
-    		var parsed = parseInt(splitTab[i])+5;
-    		if(!isNaN(parsed)) {
-    			splitTab[i] = parsed;
-    		} else {
-    			splitTab[i] = "";
-    		}
-    	}
+        // split on lines
+        var lineTab = tab.split("\n");
 
-    	// reform
-    	var reformedTab = String(splitTab[0]);
+        for(i=0;i<lineTab.length;i++){
+            // split frets
+            var splitTab = lineTab[i].split("-");
 
-    	for(i=1;i<splitTab.length;i++){
-    		reformedTab = reformedTab.concat("-"+splitTab[i]);
-    	}
+            // adjust
+            for(j=0;j<splitTab.length;j++){
+                var parsed = parseInt(splitTab[j])+5;
+                if(!isNaN(parsed)) {
+                    splitTab[j] = parsed;
+                } else {
+                    splitTab[j] = "";
+                }
+            }
+        }
 
-    	return reformedTab;
+        // reform
+        var reformedTab = String(splitTab[0]);
+
+        for(i=1;i<splitTab.length;i++){
+            reformedTab = reformedTab.concat("-"+splitTab[i]);
+        }
+
+        return reformedTab;
+    }
+
+    // takes a note and octive and returns an int
+    function noteToNumber(note, octive){
+        var noteNumber = 0;
+        switch(note){
+            case "A" noteNumber = 0 break;
+            case "Bb" noteNumber = 1 break;
+            case "B" noteNumber = 2 break;
+            case "C" noteNumber = 3 break;
+            case "C#" noteNumber = 4 break;
+            case "D" noteNumber = 5 break;
+            case "Eb" noteNumber = 6 break;
+            case "E" noteNumber = 7 break;
+            case "F" noteNumber = 8 break;
+            case "F#" noteNumber = 9 break;
+            case "G" noteNumber = 10 break;
+            case "Ab" noteNumber = 11 break;
+        }
+
+        return noteNumber + (octive * 12);
+    }
+
+    // finds the most appropriate string for a note, restricts to limited frets
+    function pickString(noteNumber){
+
+    }
+
+    // converts from a raw note number to a fret number
+    function toFret(noteNumber, stringNoteNumber){
+        return stringNoteNumber - noteNumber;
     }
 </script>
