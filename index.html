@@ -4,20 +4,20 @@
 
 <form onsubmit="return genTab()">
     Tab:<br>
-    <textarea rows="6" cols="70" name="in-tab" id="in-tab">Insert tab here!</textarea><br>
+    <textarea rows="6" cols="100" name="in-tab" id="in-tab">Insert tab here!</textarea><br>
     Instrument:<br>
     <input type="radio" name="instrument" value="guitar">Guitar<br>
     <input type="radio" name="instrument" value="mandolin">Mandolin<br>
     <input type="submit" value="Submit">
 </form>
 Output<br>
-<textarea rows="6" cols="70" name="out-tab" id="out-tab"></textarea>
+<textarea rows="6" cols="100" name="out-tab" id="out-tab"></textarea>
 <script>
     // guitar strings
     var inStrings = [noteToNumber("E",4),noteToNumber("B",3),noteToNumber("G",3),noteToNumber("D",3),noteToNumber("A",2),noteToNumber("E",2)];
 
     // mandolin strings
-    var outStrings = [noteToNumber("G",3),noteToNumber("D",4),noteToNumber("A",4),noteToNumber("E",5)]
+    var outStrings = [noteToNumber("G",3),noteToNumber("D",4),noteToNumber("A",4),noteToNumber("E",5)];
 
     
     function genTab() {
@@ -28,31 +28,43 @@ Output<br>
 
     // transpose
     function transpose(tab){
-        
-
         // split on lines
-        var lineTab = tab.split("\n");
+        var lineTab = tab.split("\n"); // split by line
+        var splitTab = []; // split by -
+        var outTab = []; // what is printed
 
-        for(i=0;i<lineTab.length;i++){
+        for(i=0;i<lineTab.length && i<inStrings.length;i++){
             // split frets
-            var splitTab = lineTab[i].split("-");
+            splitTab[i] = lineTab[i].split("-");
+            outTab[i] = [];
 
             // adjust
-            for(j=0;j<splitTab.length;j++){
-                var parsed = parseInt(splitTab[j])+5;
-                if(!isNaN(parsed)) {
-                    splitTab[j] = parsed;
+            for(j=0;j<splitTab[i].length;j++){
+                // attempt to parse as int
+                var parsed = parseInt(splitTab[i][j]);
+
+                if(!isNaN(parsed) && parsed != null) {
+                    // convert to noteNumber
+                    outTab[i][j] = parsed + inStrings[i];
                 } else {
-                    splitTab[j] = "";
+                    // do nothing
+                    if(splitTab[i][j] != ""){
+                        outTab[i][j] = splitTab[i][j];
+                    } else {
+                        outTab[i][j] = "-"
+                    }
                 }
             }
         }
 
         // reform
-        var reformedTab = String(splitTab[0]);
+        var reformedTab = ""; // string sent to output
 
-        for(i=1;i<splitTab.length;i++){
-            reformedTab = reformedTab.concat("-"+splitTab[i]);
+        for(i=0;i<outStrings.length;i++){
+            for(j=0;j<outTab[i].length;j++){
+                reformedTab = reformedTab.concat(outTab[i][j]);
+            }
+            reformedTab = reformedTab.concat("\n")
         }
 
         return reformedTab;
@@ -62,18 +74,18 @@ Output<br>
     function noteToNumber(note, octive){
         var noteNumber = 0;
         switch(note){
-            case "A" noteNumber = 0 break;
-            case "Bb" noteNumber = 1 break;
-            case "B" noteNumber = 2 break;
-            case "C" noteNumber = 3 break;
-            case "C#" noteNumber = 4 break;
-            case "D" noteNumber = 5 break;
-            case "Eb" noteNumber = 6 break;
-            case "E" noteNumber = 7 break;
-            case "F" noteNumber = 8 break;
-            case "F#" noteNumber = 9 break;
-            case "G" noteNumber = 10 break;
-            case "Ab" noteNumber = 11 break;
+            case "A": noteNumber = 0; break;
+            case "Bb": noteNumber = 1; break;
+            case "B": noteNumber = 2; break;
+            case "C": noteNumber = 3; break;
+            case "C#": noteNumber = 4; break;
+            case "D": noteNumber = 5; break;
+            case "Eb": noteNumber = 6; break;
+            case "E": noteNumber = 7; break;
+            case "F": noteNumber = 8; break;
+            case "F#": noteNumber = 9; break;
+            case "G": noteNumber = 10; break;
+            case "Ab": noteNumber = 11; break;
         }
 
         return noteNumber + (octive * 12);
