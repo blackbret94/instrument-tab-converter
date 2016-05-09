@@ -1,0 +1,42 @@
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+</head>
+
+<form onsubmit="return genTab()">
+	Tab:<br>
+	<textarea rows="6" cols="70" name="in-tab" id="in-tab">Insert tab here!</textarea><br>
+	Instrument:<br>
+	<input type="radio" name="instrument" value="guitar">Guitar<br>
+	<input type="radio" name="instrument" value="mandolin">Mandolin<br>
+	<input type="submit" value="Submit">
+</form>
+Output<br>
+<textarea rows="6" cols="70" name="out-tab" id="out-tab"></textarea>
+<script>
+	
+    function genTab() {
+    	converted = transpose( $('#in-tab').val());
+    	$('#out-tab').val(converted);
+       	return false;
+    }
+
+    // transpose
+    function transpose(tab){
+    	// split
+    	var splitTab = tab.split("-");
+
+    	// adjust
+    	for(i=0;i<splitTab.length;i++){
+    		splitTab[i] = parseInt(splitTab[i])+5;
+    	}
+
+    	// reform
+    	var reformedTab = String(splitTab[0]);
+
+    	for(i=1;i<splitTab.length;i++){
+    		reformedTab = reformedTab.concat("-"+splitTab[i]);
+    	}
+
+    	return reformedTab;
+    }
+</script>
