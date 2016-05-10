@@ -4,11 +4,52 @@ var inStrings = [noteToNumber("E",4),noteToNumber("B",3),noteToNumber("G",3),not
 // mandolin strings
 var outStrings = [noteToNumber("E",5),noteToNumber("A",4),noteToNumber("D",4),noteToNumber("G",3)];
 
+var octiveShift = 0;
 
+// main program loop
 function genTab() {
+    // read octive shift
+    octiveShift = parseInt($("#octive-shift").val());
+
+    // set up instruments
+    // from
+    var fromInstr = $("#from-instrument").val();
+    inStrings = chooseInstrument(fromInstr);
+
+    // to
+    var toInstr = $("#to-instrument").val();
+    outStrings = chooseInstrument(toInstr);
+
+    // transpose
     converted = transpose( $('#in-tab').val());
     $('#out-tab').val(converted);
     return false;
+}
+
+// converts string names to tunings
+function chooseInstrument(instr){
+    switch(instr){
+        case "guitar-standard":
+            return [noteToNumber("E",4),noteToNumber("B",3),noteToNumber("G",3),noteToNumber("D",3),noteToNumber("A",2),noteToNumber("E",2)];
+            break;
+
+        case "guitar-drop-d":
+            return [noteToNumber("E",4),noteToNumber("B",3),noteToNumber("G",3),noteToNumber("D",3),noteToNumber("A",2),noteToNumber("D",2)];
+            break;
+
+        case "guitar-half-down":
+            return [noteToNumber("Eb",4),noteToNumber("Bb",3),noteToNumber("F#",3),noteToNumber("C#",3),noteToNumber("Ab",2),noteToNumber("Eb",2)];
+            break;
+
+        case "guitar-one-down":
+            return [noteToNumber("D",4),noteToNumber("A",3),noteToNumber("F",3),noteToNumber("C",3),noteToNumber("G",2),noteToNumber("D",2)];
+            break;
+
+        case "mando-standard":
+            return [noteToNumber("E",5),noteToNumber("A",4),noteToNumber("D",4),noteToNumber("G",3)];
+            break;
+    }
+    
 }
 
 // transpose
@@ -38,17 +79,10 @@ function transpose(tab){
 
             if(!isNaN(parsed) && parsed != null) {
                 // convert to noteNumber
-                var noteNumber = parsed + inStrings[i];
+                var noteNumber = parsed + inStrings[i] + octiveShift*12;
                 var bestString = pickString(noteNumber);
                 console.log(noteNumber + " " + bestString);
-                outTab[bestString][j] = toFret(noteNumber,outStrings[bestString]) + "-";
-            // 
-            } else if(i<outStrings.length){
-                /*if(splitTab[i][j] != ""){
-                    outTab[i][j] = splitTab[i][j];
-                } else {
-                    outTab[i][j] = "-";
-                }*/
+                outTab[bestString][j] = toFret(noteNumber,outStrings[bestString]);
             }
         }
     }
