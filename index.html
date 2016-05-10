@@ -10,7 +10,7 @@
     <input type="radio" name="instrument" value="mandolin">Mandolin<br>
     <input type="submit" value="Submit">
 </form>
-Output<br>
+Output:<br>
 <textarea rows="6" cols="100" name="out-tab" id="out-tab"></textarea>
 <script>
     // guitar strings
@@ -31,13 +31,22 @@ Output<br>
         // split on lines
         var lineTab = tab.split("\n"); // split by line
         var splitTab = []; // split by -
-        var outTab = []; // what is printed
+        var outTab = new Array(outStrings); // what is printed
 
+        // init
+        for(i=0;i<outStrings.length;i++){
+            outTab[i] = [];
+            for(j=0;j<100;j++){
+                outTab[i][j]="-";
+            }
+        }
+
+        // fill
         for(i=0;i<lineTab.length && i<inStrings.length;i++){
             // split frets
             splitTab[i] = lineTab[i].split("-");
-            outTab[i] = [];
-
+            //outTab[i] = [];
+            console.log(i);
             // adjust
             for(j=0;j<splitTab[i].length;j++){
                 // attempt to parse as int
@@ -45,15 +54,19 @@ Output<br>
 
                 if(!isNaN(parsed) && parsed != null) {
                     // convert to noteNumber
-                    outTab[i][j] = parsed + inStrings[i];
-                } else {
+                    var noteNumber = parsed + inStrings[i];
+                    var bestString = pickString(noteNumber);
+                    outTab[bestString][j] = toFret(noteNumber,inStrings[bestString]);
+                } else if(i<outStrings.length){
                     // do nothing
                     if(splitTab[i][j] != ""){
                         outTab[i][j] = splitTab[i][j];
                     } else {
-                        outTab[i][j] = "-"
+                        outTab[i][j] = "-";
                     }
                 }
+
+                console.log(j);
             }
         }
 
@@ -93,7 +106,18 @@ Output<br>
 
     // finds the most appropriate string for a note, restricts to limited frets
     function pickString(noteNumber){
+        var bestString = 0; // what string is most appropriate?
+        var bestDistance = 100000; // how far am I from the open string?
 
+        for(k=0; k<outStrings.length; k++){
+            var thisDistance = outStrings[k] -noteNumber;
+            if(thisDistance < bestDistance && thisDistance >= 0){
+                bestString = k;
+                bestDistance = thisDistance;
+            }
+        }
+
+        return bestString;
     }
 
     // converts from a raw note number to a fret number
