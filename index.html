@@ -1,127 +1,22 @@
+<html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 </head>
-
-<form onsubmit="return genTab()">
-    Tab:<br>
-    <textarea rows="6" cols="100" name="in-tab" id="in-tab">Insert tab here!</textarea><br>
-    Instrument:<br>
-    <input type="radio" name="instrument" value="guitar">Guitar<br>
-    <input type="radio" name="instrument" value="mandolin">Mandolin<br>
-    <input type="submit" value="Submit">
-</form>
-Output:<br>
-<textarea rows="6" cols="100" name="out-tab" id="out-tab"></textarea>
-<script>
-    // guitar strings
-    var inStrings = [noteToNumber("E",4),noteToNumber("B",3),noteToNumber("G",3),noteToNumber("D",3),noteToNumber("A",2),noteToNumber("E",2)];
-
-    // mandolin strings
-    var outStrings = [noteToNumber("G",3),noteToNumber("D",4),noteToNumber("A",4),noteToNumber("E",5)];
-
-    
-    function genTab() {
-        converted = transpose( $('#in-tab').val());
-        $('#out-tab').val(converted);
-        return false;
-    }
-
-    // transpose
-    function transpose(tab){
-        // split on lines
-        var lineTab = tab.split("\n"); // split by line
-        var splitTab = []; // split by -
-        var outTab = new Array(outStrings); // what is printed
-
-        // init
-        for(i=0;i<outStrings.length;i++){
-            outTab[i] = [];
-            for(j=0;j<100;j++){
-                outTab[i][j]="-";
-            }
-        }
-
-        // fill
-        for(i=0;i<lineTab.length && i<inStrings.length;i++){
-            // split frets
-            splitTab[i] = lineTab[i].split("-");
-            //outTab[i] = [];
-            console.log(i);
-            // adjust
-            for(j=0;j<splitTab[i].length;j++){
-                // attempt to parse as int
-                var parsed = parseInt(splitTab[i][j]);
-
-                if(!isNaN(parsed) && parsed != null) {
-                    // convert to noteNumber
-                    var noteNumber = parsed + inStrings[i];
-                    var bestString = pickString(noteNumber);
-                    outTab[bestString][j] = toFret(noteNumber,inStrings[bestString]);
-                } else if(i<outStrings.length){
-                    // do nothing
-                    if(splitTab[i][j] != ""){
-                        outTab[i][j] = splitTab[i][j];
-                    } else {
-                        outTab[i][j] = "-";
-                    }
-                }
-
-                console.log(j);
-            }
-        }
-
-        // reform
-        var reformedTab = ""; // string sent to output
-
-        for(i=0;i<outStrings.length;i++){
-            for(j=0;j<outTab[i].length;j++){
-                reformedTab = reformedTab.concat(outTab[i][j]);
-            }
-            reformedTab = reformedTab.concat("\n")
-        }
-
-        return reformedTab;
-    }
-
-    // takes a note and octive and returns an int
-    function noteToNumber(note, octive){
-        var noteNumber = 0;
-        switch(note){
-            case "A": noteNumber = 0; break;
-            case "Bb": noteNumber = 1; break;
-            case "B": noteNumber = 2; break;
-            case "C": noteNumber = 3; break;
-            case "C#": noteNumber = 4; break;
-            case "D": noteNumber = 5; break;
-            case "Eb": noteNumber = 6; break;
-            case "E": noteNumber = 7; break;
-            case "F": noteNumber = 8; break;
-            case "F#": noteNumber = 9; break;
-            case "G": noteNumber = 10; break;
-            case "Ab": noteNumber = 11; break;
-        }
-
-        return noteNumber + (octive * 12);
-    }
-
-    // finds the most appropriate string for a note, restricts to limited frets
-    function pickString(noteNumber){
-        var bestString = 0; // what string is most appropriate?
-        var bestDistance = 100000; // how far am I from the open string?
-
-        for(k=0; k<outStrings.length; k++){
-            var thisDistance = outStrings[k] -noteNumber;
-            if(thisDistance < bestDistance && thisDistance >= 0){
-                bestString = k;
-                bestDistance = thisDistance;
-            }
-        }
-
-        return bestString;
-    }
-
-    // converts from a raw note number to a fret number
-    function toFret(noteNumber, stringNoteNumber){
-        return stringNoteNumber - noteNumber;
-    }
-</script>
+<body>
+    <h1>Guitar To Mandolin Tab Converter</h1>
+    <h2>By Bret Black</h2><br>    
+    <form onsubmit="return genTab()">
+        Tab:<br>
+        <textarea rows="6" cols="100" name="in-tab" id="in-tab">Insert tab here!</textarea><br>
+        Instrument:<br>
+        <input type="radio" name="instrument" value="guitar">Guitar<br>
+        <input type="radio" name="instrument" value="mandolin">Mandolin<br>
+        <input type="submit" value="Submit">
+    </form>
+    Output:<br>
+    <textarea rows="6" cols="100" name="out-tab" id="out-tab"></textarea>
+    <script src="https://code.jquery.com/qunit/qunit-1.23.1.js"></script>
+    <script src="tests.js"></script>
+    <script src="tab-converter.js"></script>
+</body>
+</html>
