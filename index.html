@@ -12,41 +12,71 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/qunit/qunit-1.23.1.js"></script>
+    <script src="tests.js"></script>
+    <script src="tab-converter.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8"> 
 </head>
 <body>
-    <h1>Cross-Instrumental Tab Converter</h1>
-    <h2>By Bret Black</h2>
-    This is an open source tool to convert tabulature between instruments and tunings.  It is in an early test state. This system currently does not support double-digit frets and errors may occur when two notes are to be played at the same time.<br><br>
-    <form onsubmit="return genTab()">
-        Tab:<br>
-        <textarea rows="6" cols="100" id="in-tab" style="font-family:monospace;">Insert tab here!</textarea><br><br>
-        From: 
-        <select id="from-instrument">
-            <option value="guitar-standard" selected="selected">Guitar (eBGDAE)</option>
-            <option value="guitar-drop-d">Guitar (eBGDAD)</option>
-            <option value="guitar-half-down">Guitar (ebBbF#C#AbEb)</option>
-            <option value="mando-standard">Mandolin (EADG)</option>
-            <option value="guitar-one-down">Guitar (dAFCGD)</option>
-        </select><br>
-        To: 
-        <select id="to-instrument">
-            <option value="guitar-standard">Guitar (eBGDAE)</option>
-            <option value="guitar-drop-d">Guitar (eBGDAD)</option>
-            <option value="guitar-half-down">Guitar (ebBbF#C#AbEb)</option>
-            <option value="guitar-one-down">Guitar (dAFCGD)</option>
-            <option value="mando-standard" selected="selected">Mandolin (EADG)</option>
-        </select><br>
-        Octive Shift:
-        <input type="text" id="octive-shift" value="0">
-        <br>
-        <input type="submit" value="Submit">
-    </form>
-    Output:<br>
-    <textarea rows="6" cols="100" id="out-tab" style="font-family:monospace;"></textarea>
-    <script src="https://code.jquery.com/qunit/qunit-1.23.1.js"></script>
-    <script src="tests.js"></script>
-    <script src="tab-converter.js"></script>
+    <nav class="navbar navbar-inverse" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#" class="active">Tab Transposer</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="help.html">About</a></li>
+          <li><a href="https://github.com/blackbret94/instrument-tab-converter">Source</a></li> 
+          <li><a href="http://www.bretblack.com">More Things</a></li> 
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+        This is an open source tool to convert tabulature between instruments and tunings.  It is in an early test state. This system currently does not support double-digit frets and errors may occur when two notes are to be played at the same time.<br><br>
+        <form onsubmit="return genTab()" role="form">
+            <label for="in-tab">Tab:</label>
+            <textarea rows="6" cols="100" id="in-tab" style="font-family:monospace;" class="form-control" wrap="off">Insert tab here!</textarea><br>
+            <div class="form-group">
+                <div class="row">
+                    <div class="form-group col-xs-5 col-lg-1">
+                        <label for="from-instrument">From:</label>
+                        <select id="from-instrument" class="form-control">
+                            <option value="guitar-standard" selected="selected">Guitar (eBGDAE)</option>
+                            <option value="guitar-drop-d">Guitar (eBGDAD)</option>
+                            <option value="guitar-half-down">Guitar (ebBbF#C#AbEb)</option>
+                            <option value="mando-standard">Mandolin (EADG)</option>
+                            <option value="guitar-one-down">Guitar (dAFCGD)</option>
+                        </select><br>
+                    </div>
+                    <div class="form-group col-xs-5 col-lg-1">
+                        <label for="to-instrument">To:</label>
+                        <select id="to-instrument" class="form-control">
+                            <option value="guitar-standard">Guitar (eBGDAE)</option>
+                            <option value="guitar-drop-d">Guitar (eBGDAD)</option>
+                            <option value="guitar-half-down">Guitar (ebBbF#C#AbEb)</option>
+                            <option value="guitar-one-down">Guitar (dAFCGD)</option>
+                            <option value="mando-standard" selected="selected">Mandolin (EADG)</option>
+                        </select><br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-xs-5 col-lg-1">
+                        <label for="octive-shift">Octive Shift</label>
+                        <input type="text" id="octive-shift" value="0" class="form-control">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="form-group col-xs-5 col-lg-1">
+                        <input type="submit" value="Submit" class="btn btn-primary">
+                    </div>
+                </div>
+            </div>
+        </form>
+        <label for="out-tab">Output:</label>
+        <textarea rows="6" cols="100" id="out-tab" style="font-family:monospace;" class="form-control" wrap="off"></textarea>
+    </div>
+</div>
 </body>
 </html>

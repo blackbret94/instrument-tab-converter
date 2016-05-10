@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/qunit/qunit-1.23.1.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8"> 
+</head>
+<body>
+    <nav class="navbar navbar-inverse" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="index.html">Tab Transposer</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">About</a></li>
+          <li><a href="https://github.com/blackbret94/instrument-tab-converter">Source</a></li> 
+          <li><a href="http://www.bretblack.com">More Things</a></li> 
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+        <p>This tool was originally developed to make it easier for me to play songs by the Dropkick Murphys on mandolin.  Many of these songs are played on mandolin and banjo but most of the tabs online are transposed for guitar.  So I decided to make something that would transpose these songs back.  I realized this algorithm can also be used to transpose tabs across tunings and capos, so I added those features in as well.</p>
+
+        <p>This tool is fairly limited in its current state.  Input tabs containing double-digit frets are not supported - a "12" will be read as frets "1" and "2" and will be transposed as such.  Additionally, errors may occur if you input two notes being played at the same time - if the algorithm determines that these two notes should be played on the same string, one of these notes will be lost.</p>
+
+        <p>Each line of input represents a single string.  Be sure to remove any text above your tab and do not attempt to stack blocks of tab on top of each other - this will not work.</p>  
+
+        <p>All source code can be found on my GitHub, linked above.  Suggestions and merge requests will be taken seriously.</p>
+        <p>Feel free to email me at blackbret94@gmail.com.</p>
+    </div>
+</body>
+</html>
