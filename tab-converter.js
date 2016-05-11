@@ -48,6 +48,14 @@ function chooseInstrument(instr){
         case "mando-standard":
             return [noteToNumber("E",5),noteToNumber("A",4),noteToNumber("D",4),noteToNumber("G",3)];
             break;
+
+        case "mando-standard":
+            return [noteToNumber("E",5),noteToNumber("A",4),noteToNumber("D",4),noteToNumber("G",3)];
+            break;
+
+        case "uku-standard":
+            return [noteToNumber("G",4),noteToNumber("C",4),noteToNumber("E",4),noteToNumber("A",4)];
+            break;
     }
     
 }
