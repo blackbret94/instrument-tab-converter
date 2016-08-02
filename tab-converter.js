@@ -32,13 +32,19 @@ function saveTab() {
     var filename = $('#save-name').val();
 
     // get top matter
-    //var filename = $('#save-name');
+    var artist = $('#artist-name').val();
+    var songTitle = $('#song-title').val();
+
+    // get instrument
+    var instr = $('#to-instrument option:selected').text();
 
     // get tab
     var tab = $('#out-tab').val();
 
+    // concat
+    var str = songTitle + "\n" + artist + "\n" + instr + "\n" + "\n" + tab;
 
-    var blob = new Blob([tab], {type: "text/plain;charset=utf-8"});
+    var blob = new Blob([str], {type: "text/plain;charset=utf-8"});
     saveAs(blob, filename);
 }
 
