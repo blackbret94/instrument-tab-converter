@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
@@ -15,6 +15,13 @@
     <script src="https://code.jquery.com/qunit/qunit-1.23.1.js"></script>
     <script src="tests.js"></script>
     <script src="tab-converter.js"></script>
+
+    <!-- SaveFile -->
+    <script src="./FileSaver.js/FileSaver.js"></script>
+    <script src="./FileSaver.js/FileSaver.min.js"></script>
+    <!--<script src="./FileSaver.js/FileSaver.js"></script>
+    <script src="./FileSaver.js/FileSaver.js"></script>-->
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8"> 
 </head>
@@ -26,6 +33,7 @@
         </div>
         <ul class="nav navbar-nav">
           <li><a href="help.html">About</a></li>
+          <li><a href="#">Key Finder</a></li>
           <li><a href="https://github.com/blackbret94/instrument-tab-converter">Source</a></li> 
           <li><a href="http://www.bretblack.com">More Things</a></li> 
         </ul>
@@ -72,7 +80,7 @@
                 <br>
                 <div class="row">
                     <div class="form-group col-xs-5 col-lg-1">
-                        <input type="submit" value="Submit" class="btn btn-primary">
+                        <input type="submit" value="Convert" class="btn btn-primary">
                     </div>
                 </div>
             </div>
@@ -80,6 +88,41 @@
         <label for="out-tab">Output:</label>
         <textarea rows="6" cols="100" id="out-tab" style="font-family:monospace;" class="form-control" wrap="off"></textarea>
     </div>
+    <br>
 </div>
+
+<!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Save Tab</button>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Download Tab</h4>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return saveTab()" role="form">
+            <div class="form-group">
+                <label for="save-name">File name:</label>
+                <input type="text" id="save-name" value="mytab.txt" class="form-control">
+                <br>
+                <input type="submit" value="Download" class="btn btn-primary">
+            </div>
+        </form>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 </body>
 </html>

@@ -26,36 +26,45 @@ function genTab() {
     return false;
 }
 
+// saves the tab
+function saveTab() {
+    // get file name
+    var filename = $('#save-name').val();
+
+    // get top matter
+    //var filename = $('#save-name');
+
+    // get tab
+    var tab = $('#out-tab').val();
+
+
+    var blob = new Blob([tab], {type: "text/plain;charset=utf-8"});
+    saveAs(blob, filename);
+}
+
 // converts string names to tunings
 function chooseInstrument(instr){
     switch(instr){
         case "guitar-standard":
             return [noteToNumber("E",4),noteToNumber("B",3),noteToNumber("G",3),noteToNumber("D",3),noteToNumber("A",2),noteToNumber("E",2)];
-            break;
 
         case "guitar-drop-d":
             return [noteToNumber("E",4),noteToNumber("B",3),noteToNumber("G",3),noteToNumber("D",3),noteToNumber("A",2),noteToNumber("D",2)];
-            break;
 
         case "guitar-half-down":
             return [noteToNumber("Eb",4),noteToNumber("Bb",3),noteToNumber("F#",3),noteToNumber("C#",3),noteToNumber("Ab",2),noteToNumber("Eb",2)];
-            break;
 
         case "guitar-one-down":
             return [noteToNumber("D",4),noteToNumber("A",3),noteToNumber("F",3),noteToNumber("C",3),noteToNumber("G",2),noteToNumber("D",2)];
-            break;
 
         case "mando-standard":
             return [noteToNumber("E",5),noteToNumber("A",4),noteToNumber("D",4),noteToNumber("G",3)];
-            break;
 
         case "mando-standard":
             return [noteToNumber("E",5),noteToNumber("A",4),noteToNumber("D",4),noteToNumber("G",3)];
-            break;
 
         case "uku-standard":
             return [noteToNumber("G",4),noteToNumber("C",4),noteToNumber("E",4),noteToNumber("A",4)];
-            break;
     }
     
 }
