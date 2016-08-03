@@ -32,11 +32,11 @@
     <nav class="navbar navbar-inverse" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#" class="active">Tab Transpose</a>
+                <a class="navbar-brand" href=index.html#">Tab Transpose</a>
             </div>
             <ul class="nav navbar-nav">
                 <li><a href="help.html">About</a></li>
-                <li><a href="key-finder.html">Key Finder</a></li>
+                <li><a href="#" class="active">Key Finder</a></li>
                 <li><a href="https://github.com/blackbret94/instrument-tab-converter">Source</a></li>
                 <li><a href="http://www.bretblack.com">More Things</a></li>
             </ul>
@@ -46,9 +46,9 @@
             alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
 
     <div class="container-fluid">
-        This is an open source tool to convert tabulature between instruments and tunings. It is in an early test state. This system
+        This is an open source tool to guess the key of tablature. It is in an early test state. This system
         currently does not support double-digit frets and errors may occur when two notes are to be played at the same time.<br><br>
-        <form onsubmit="return genTab()" role="form">
+        <form onsubmit="return genKey()" role="form">
             <label for="in-tab">Tab:</label>
             <textarea rows="6" cols="100" id="in-tab" style="font-family:monospace;" class="form-control" wrap="off">Insert tab here!</textarea><br>
             <div class="form-group">
@@ -64,28 +64,10 @@
                             <option value="uke-standard">Ukulele (GCEA)</option>
                         </select><br>
                     </div>
-                    <div class="form-group col-xs-5 col-lg-1">
-                        <label for="to-instrument">To:</label>
-                        <select id="to-instrument" class="form-control">
-                            <option value="guitar-standard">Guitar (eBGDAE)</option>
-                            <option value="guitar-drop-d">Guitar (eBGDAD)</option>
-                            <option value="guitar-half-down">Guitar (ebBbF#C#AbEb)</option>
-                            <option value="guitar-one-down">Guitar (dAFCGD)</option>
-                            <option value="mando-standard" selected="selected">Mandolin (EADG)</option>
-                            <option value="uku-standard">Ukulele (GCEA)</option>
-                        </select><br>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-xs-5 col-lg-1">
-                        <label for="octive-shift">Octive Shift</label>
-                        <input type="text" id="octive-shift" value="0" class="form-control">
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="form-group col-xs-5 col-lg-1">
-                        <input type="submit" value="Convert" class="btn btn-primary">
+                        <input type="submit" value="Guess Key" class="btn btn-primary">
                     </div>
                 </div>
             </div>
