@@ -5,8 +5,11 @@ function genKey(){
     var fromInstr = $("#from-instrument").val();
     inStrings = chooseInstrument(fromInstr);
 
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+
     // transpose
-    converted = findKey($('#in-tab').val());
+    //converted = findKey();
     //$('#out-tab').val(converted);
     return false;
 }
@@ -50,20 +53,33 @@ function findKey(tab) {
     }
 
     console.log("Keys:");
+    return noteHoles;
+}
 
-    rankKeys(noteHoles);
-    
-    // reform
-    /*var reformedTab = ""; // string sent to output
+// draw the chart
+function drawChart() {
+    var keys = [['Keys', 'Likelyness of Major Key']];
+    var noteHoles = findKey($('#in-tab').val());
+    var keyHoles = rankKeys(noteHoles);
+    //keys.push([['Keys', 'Likelyness of Major Key']]);
 
-    for (var i = 0; i < outStrings.length; i++) {
-        for (var j = 0; j < outTab[i].length; j++) {
-            reformedTab = reformedTab.concat(outTab[i][j]);
+    // gather relevant keys
+    for(var i=0;i<keyHoles.length;i++){
+        if(keyHoles[i] > 0){
+            // add
+            keys.push([numberToNote(i),keyHoles[i]]);
         }
-        reformedTab = reformedTab.concat("\n")
     }
 
-    return reformedTab;*/
+    var data = google.visualization.arrayToDataTable(keys);
+
+    var options = {
+        title: 'Likelyhood of Major Keys',
+        is3D: true,
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+    chart.draw(data, options);
 }
 
 // rank keys
@@ -73,21 +89,23 @@ function rankKeys(noteArray){
     // init
     for (var i = 0; i < keyHoles.length; i++) {
         keyHoles[i] = 0;
-        keyHoles[i] += noteArray[modNote(i)]*2; // bonus for root note
-        keyHoles[i] -= noteArray[modNote(i+1)];
+        keyHoles[i] += noteArray[modNote(i)]*3; // bonus for root note
+        keyHoles[i] -= noteArray[modNote(i+1)]*5;
         keyHoles[i] += noteArray[modNote(i+2)];
-        keyHoles[i] -= noteArray[modNote(i+3)];
+        keyHoles[i] -= noteArray[modNote(i+3)]*5;
         keyHoles[i] += noteArray[modNote(i+4)];
         keyHoles[i] += noteArray[modNote(i+5)];
-        keyHoles[i] -= noteArray[modNote(i+6)];
+        keyHoles[i] -= noteArray[modNote(i+6)]*5;
         keyHoles[i] += noteArray[modNote(i+7)];
-        keyHoles[i] -= noteArray[modNote(i+8)];
+        keyHoles[i] -= noteArray[modNote(i+8)]*5;
         keyHoles[i] += noteArray[modNote(i+9)];
-        keyHoles[i] -= noteArray[modNote(i+10)];
+        keyHoles[i] -= noteArray[modNote(i+10)]*5;
         keyHoles[i] += noteArray[modNote(i+11)];
         
         console.log(i + ": " + keyHoles[i]);
     }
+
+    return keyHoles;
 }
 
 // raw note

@@ -144,6 +144,27 @@ function noteToNumber(note, octive) {
     return noteNum + (octive * 12);
 }
 
+// takes a note number and returns the letter symbol
+function numberToNote(note){
+    var noteName = 0;
+    switch (note % 12) {
+        case 0: noteName = "C"; break;
+        case 1: noteName = "C#"; break;
+        case 2: noteName = "D"; break;
+        case 3: noteName = "Eb"; break;
+        case 4: noteName = "E"; break;
+        case 5: noteName = "F"; break;
+        case 6: noteName = "F#"; break;
+        case 7: noteName = "G"; break;
+        case 8: noteName = "Ab"; break;
+        case 9: noteName = "A"; break;
+        case 10: noteName = "Bb"; break;
+        case 11: noteName = "B"; break;
+    }
+
+    return noteName;
+}
+
 // finds the most appropriate string for a note, restricts to limited frets
 function pickString(noteNum) {
     var bestString = 0; // what string is most appropriate?

@@ -11,6 +11,9 @@
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 
+    <!-- Google Charts -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
     <!-- Latest compiled JavaScript -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/qunit/qunit-1.23.1.js"></script>
@@ -72,48 +75,9 @@
                 </div>
             </div>
         </form>
-        <label for="out-tab">Output:</label>
-        <textarea rows="6" cols="100" id="out-tab" style="font-family:monospace;" class="form-control" wrap="off"></textarea>
-        <br>
-        <!-- Trigger the modal with a button -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Download Tab</button>
+        <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
     </div>
-    <br>
-    </div>
-
-    <!-- Modal -->
-    <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Download Tab</h4>
-                </div>
-                <div class="modal-body">
-                    <form onsubmit="return saveTab()" role="form">
-                        <div class="form-group">
-                            <label for="song-title">Song Title:</label>
-                            <input type="text" id="song-title" class="form-control">
-                            <label for="artist-name">Artist Name:</label>
-                            <input type="text" id="artist-name" class="form-control">
-                            <label for="save-name">File Name:</label>
-                            <input type="text" id="save-name" value="mytab.txt" class="form-control">
-                            <br>
-                            <input type="submit" value="Download" class="btn btn-primary">
-                        </div>
-                    </form>
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
+</div>
 
 </body>
 
