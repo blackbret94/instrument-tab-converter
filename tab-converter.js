@@ -5,11 +5,15 @@ var inStrings = [noteToNumber("E", 4), noteToNumber("B", 3), noteToNumber("G", 3
 var outStrings = [noteToNumber("E", 5), noteToNumber("A", 4), noteToNumber("D", 4), noteToNumber("G", 3)];
 
 var octiveShift = 0;
+var keyShift = 0;
 
 // main program loop
 function genTab() {
     // read octive shift
     octiveShift = parseInt($("#octive-shift").val());
+    
+    // read key shift
+    keyShift = parseInt($("#key-shift").val());
 
     // set up instruments
     // from
@@ -102,7 +106,7 @@ function transpose(tab) {
 
             if (!isNaN(parsed) && parsed != null) {
                 // convert to noteNumber
-                var noteNumber = parsed + inStrings[i] + octiveShift * 12;
+                var noteNumber = parsed + inStrings[i] + octiveShift * 12 + keyShift;
                 var bestString = pickString(noteNumber);
                 console.log(noteNumber + " " + bestString);
                 outTab[bestString][j] = toFret(noteNumber, outStrings[bestString]);

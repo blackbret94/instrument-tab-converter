@@ -53,7 +53,7 @@
             <textarea rows="6" cols="100" id="in-tab" style="font-family:monospace;" class="form-control" wrap="off">Insert tab here!</textarea><br>
             <div class="form-group">
                 <div class="row">
-                    <div class="form-group col-xs-5 col-lg-1">
+                    <div class="form-group col-xs-5 col-lg-3">
                         <label for="from-instrument">From:</label>
                         <select id="from-instrument" class="form-control">
                             <option value="guitar-standard" selected="selected">Guitar (eBGDAE)</option>
@@ -64,7 +64,7 @@
                             <option value="uke-standard">Ukulele (GCEA)</option>
                         </select><br>
                     </div>
-                    <div class="form-group col-xs-5 col-lg-1">
+                    <div class="form-group col-xs-5 col-lg-3">
                         <label for="to-instrument">To:</label>
                         <select id="to-instrument" class="form-control">
                             <option value="guitar-standard">Guitar (eBGDAE)</option>
@@ -77,16 +77,22 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-xs-5 col-lg-1">
+                    <div class="form-group col-xs-5 col-lg-2">
                         <label for="octive-shift">Octive Shift</label>
                         <input type="text" id="octive-shift" value="0" class="form-control">
+                    </div>
+                    <div class="form-group col-xs-5 col-lg-2">
+                        <label for="key-shift">Key Shift</label>
+                        <input type="text" id="key-shift" value="0" class="form-control">
+                    </div>
+                    <div class="form-group col-xs-5 col-lg-2">
+                        <br>
+                        <input type="submit" value="Convert" class="btn btn-primary" style="float:right">
                     </div>
                 </div>
                 <br>
                 <div class="row">
-                    <div class="form-group col-xs-5 col-lg-1">
-                        <input type="submit" value="Convert" class="btn btn-primary">
-                    </div>
+                    
                 </div>
             </div>
         </form>
