@@ -75,6 +75,9 @@ function chooseInstrument(instr) {
 
         case "uku-standard":
             return [noteToNumber("G", 4), noteToNumber("C", 4), noteToNumber("E", 4), noteToNumber("A", 4)];
+        
+        case "banjo-standard":
+            return [noteToNumber("G", 4), noteToNumber("D",3), noteToNumber("G", 3), noteToNumber("B",3), noteToNumber("D",4)];
     }
 
 }
