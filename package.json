@@ -1,0 +1,20 @@
+{
+    "name": "Tab-Transposer",
+    "version": "1.0.0",
+    "scripts": {
+        "build": "node js/build.js",
+        "watch": "onchange -i 'js/**/*.js' -- npm run build"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.8.3",
+        "@babel/core": "^7.8.3",
+        "@babel/preset-env": "^7.8.3",
+        "args": "^5.0.1",
+        "babelify": "^10.0.0",
+        "browserify": "^16.5.0",
+        "core-js": "^3.6.4",
+        "mdn-polyfills": "^5.19.0",
+        "onchange": "^6.1.0",
+        "uglifyify": "^5.0.2"
+    }
+}

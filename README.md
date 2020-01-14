@@ -8,3 +8,21 @@ Each line of input represents a single string. Be sure to remove any text above 
 All source code can be found on my GitHub, linked above. Suggestions and merge requests will be taken seriously.
 
 Feel free to email me at blackbret94@gmail.com.
+
+## Compiling
+Several build steps are used to create backwards compatible, and efficient, javascript.  This requires that you have NodeJS installed.
+
+- Browserify is used to combine scripts into a single bundle.
+- Babel is used to compile the JS into a form that can be used by older browsers.
+- Uglify is used to minify the script, making it smaller to download.
+
+```
+# install packages
+npm install 
+
+# compile JS (once)
+npm run build
+
+# run watcher to compile JS
+npm run watch
+```
