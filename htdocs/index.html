@@ -103,13 +103,12 @@ Insert tab here, choose your settings, and click "Convert"!
                         </div>
                     </div>
                     <button type="button" id="convert-button" class="btn btn-primary align-middle" style="float:right;">Convert</button>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Download</button>
-                    </div>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#download-modal">Download</button>
                 </div>
             </div>
         </form>
         <br>
-        <div class="col-sm-12">
+        <div class="col-sm-12 no-padding">
             <div class="form-group">
                 <label for="out-tab">Output:</label>
                 <textarea rows="12" cols="100" id="out-tab" style="font-family:monospace;" class="form-control" wrap="off"></textarea>
@@ -117,8 +116,13 @@ Insert tab here, choose your settings, and click "Convert"!
         </div>
     </div>
 
+    <!-- Footer -->
+    <div class="footer text-center text-muted">
+        Tab Transposer by Bret Black 2016-2020
+    </div>
+
     <!-- Modal -->
-    <div id="myModal" class="modal fade" role="dialog">
+    <div id="download-modal" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
